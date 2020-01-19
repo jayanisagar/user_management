@@ -1,0 +1,93 @@
+<div>
+    <h2>User List</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>First name</td>
+            <td>Last name</td>
+            <td>Email Address</td>
+            <td>Password</td>
+            <td>Status</td>
+            <td>Action</td>
+        </tr>
+        <tr *ngFor="let u of userList">
+            <td>{{u?.first_name}}</td>
+            <td>{{u?.last_name}}</td>
+            <td>{{u?.email_address}}</td>
+            <td>{{u?.password}}</td>
+            <td>{{u?.status}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="onAction('edit', u?.id, u)">Edit</button> | 
+                <button class="btn btn-primary" (click)="onAction('delete', u?.id, u)">Delete</button> |
+                <button class="btn btn-primary" (click)="onAction('active', u?.id, u)">Active</button> |
+                <button class="btn btn-primary" (click)="onAction('deactive', u?.id, u)">Deactive</button> |
+                <button class="btn btn-primary" (click)="onAction('activityUser', u?.id, u)">Activity User</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="idEditUser">
+    <h2>Edit</h2> 
+    <form [formGroup]="editForm" class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <label class="label">first_name</label>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                <input type="text" formControlName="first_name" class="form-control ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <label class="label">last_name</label>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                <input type="text" formControlName="last_name" class="form-control ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <label class="label">email_address</label>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                <input type="text" formControlName="email_address" class="form-control ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <label class="label">Password</label>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                <input type="text" formControlName="password" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <label class="label">status</label>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                <input type="radio" name="status" value="true" formControlName="status"> Active
+                <input type="radio" name="status" value="false" formControlName="status"> Deactive
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" (click)="idEditUser = 0">Cancel</button>
+        <button [disabled]="!editForm.valid" (click)="editSubmit()" class="btn btn-primary">Submit </button>
+    </form>
+</div>
+<div *ngIf="idActivityUser">
+    <h2> Activity User</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>action</td>
+            <td>user_id</td>
+            <td>details</td>
+        </tr>
+        <tr *ngFor="let u of activityUserList">
+            <td>{{u?.action}}</td>
+            <td>{{u?.user_id}}</td>
+            <td>{{u?.details}}</td>
+        </tr>
+    </table>
+
+    <button class="btn btn-primary" (click)="idActivityUser = 0">Cancel</button>
+</div>
