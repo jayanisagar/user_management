@@ -127,9 +127,7 @@ export class LoginService {
 
   activeDeactiveUser(id, obj): Promise<any> {
 
-    let reuqestDataObj = {
-      'status': obj
-    };
+    let reuqestDataObj = 'status='+obj;
 
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.activeDeactiveUser(id, reuqestDataObj)

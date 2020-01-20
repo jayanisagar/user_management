@@ -32,7 +32,7 @@ export class DataService {
     return this.httpClient.delete(this.users+'/'+id).toPromise();
   }
   activeDeactiveUser(id, userDetails): Promise<any> {
-    return this.httpClient.put(this.users+'/status/'+id, userDetails).toPromise();
+    return this.httpClient.put(this.users+'/status/'+id+'?'+userDetails, '').toPromise();
   }
 
   activityUser(id): Promise<any> {

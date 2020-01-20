@@ -13,10 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::put('user_managements/status/{id}', 'API\UserManagementController@statuschange');
 Route::resource('user_managements', 'API\UserManagementController');
-
-Route::get('user_activities/status/{id}', 'API\UserActivityController@statuschange');
 Route::resource('user_activities', 'API\UserActivityController');
+
+/* Route::prefix('user_activities')->group(function () {
+    Route::get('', 'API\UserActivityController@index');
+    Route::put('{id}', 'API\UserActivityController@show');
+    Route::post('', 'API\UserActivityController@store');
+    Route::put('{id}', 'API\UserActivityController@update');
+    Route::delete('', 'API\UserActivityController@destroy');
+    Route::put('/status/{id}', 'API\UserActivityController@statuschange');
+}); */
+
 
 /* Route::resource('user_managements', 'API\UserManagementController')->except([
     'create', 'store', 'update', 'destroy'

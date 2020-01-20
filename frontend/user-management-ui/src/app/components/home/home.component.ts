@@ -43,14 +43,12 @@ export class HomeComponent implements OnInit {
   onAction(action: string, id: number, userData: any) {
     switch (action) {
       case 'create':
-        console.log('create');
         let obj1 = { first_name: 'sagar', last_name: 'jayani', email_address: 'jayanisagar@gmail.com', password: '123456', status: true };
         this.loginService.createUser(obj1).then(res => {
           this.loadData();
         });
         break;
       case 'edit':
-        console.log('edit');
         this.idEditUser = id;
         this.setEditForm(userData);
         break;
@@ -60,12 +58,12 @@ export class HomeComponent implements OnInit {
         });
         break;
       case 'active':
-        this.loginService.activeDeactiveUser(id, true).then(res => {
+        this.loginService.activeDeactiveUser(id, 1).then(res => {
           this.loadData();
         });
         break;
       case 'deactive':
-        this.loginService.activeDeactiveUser(id, false).then(res => {
+        this.loginService.activeDeactiveUser(id, 0).then(res => {
           this.loadData();
         });
         break;

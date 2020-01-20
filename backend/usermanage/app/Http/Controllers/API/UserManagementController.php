@@ -162,7 +162,7 @@ class UserManagementController extends BaseController
         return $this->sendResponse($usermanagement->toArray(), 'User deleted successfully.');
     }
 
-    public function statuschange($id) {
+    public function statuschange(Request $request, $id) {
         $input = $request->all();
 
         $usermanagement = UserManagement::find($id);
