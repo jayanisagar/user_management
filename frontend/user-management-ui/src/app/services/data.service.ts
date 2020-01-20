@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
 
-  login = environment.baseUrl + 'oauth/token';
+  login = environment.baseUrl + 'login';
+  register = environment.baseUrl + 'register';
 
   users = environment.baseUrl + 'user_managements';
 
@@ -23,7 +24,7 @@ export class DataService {
   }
 
   createUser(userDetails): Promise<any> {
-    return this.httpClient.post(this.users, userDetails).toPromise();
+    return this.httpClient.post(this.register, userDetails).toPromise();
   }
   editUser(id, userDetails): Promise<any> {
     return this.httpClient.put(this.users+'/'+id+'?'+userDetails, '').toPromise();

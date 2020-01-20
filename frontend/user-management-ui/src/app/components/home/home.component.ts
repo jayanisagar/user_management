@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,22 @@ export class HomeComponent implements OnInit {
   idEditUser: number = 0;
   idActivityUser: number = 0;
 
-  constructor(public loginService: LoginService, private fb: FormBuilder) { }
+  userDetail : any = null;
+
+  constructor(public loginService: LoginService, private fb: FormBuilder,
+    public router: Router) {
+      this.loginService.userDetailsSubject.subscribe(res => {
+        this.userDetail = res;
+        console.log("this.userDetail", this.userDetail);
+      });
+     }
 
   ngOnInit() {
+
+    
+
+    this.userDetail = this.loginService.getUser();
+
     this.initForm();
     this.loadData();
   }
@@ -114,5 +128,11 @@ export class HomeComponent implements OnInit {
       console.log(res);
       this.activityUserList = res.data;
     });
+  }
+
+  logout() {
+    this.userDetail = null;
+    this.loginService.logoutUser();
+    this.router.navigate(['../login']);
   }
 }

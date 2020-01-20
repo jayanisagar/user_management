@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('login', 'API\RegisterController@login');
+Route::post('register', 'API\RegisterController@register');
+
 Route::put('user_managements/status/{id}', 'API\UserManagementController@statuschange');
 Route::resource('user_managements', 'API\UserManagementController');
 Route::resource('user_activities', 'API\UserActivityController');

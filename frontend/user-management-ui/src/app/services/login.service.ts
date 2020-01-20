@@ -14,20 +14,18 @@ export class LoginService {
 
   loginUser(obj): Promise<any> {
 
-    let reuqestDataObj = {
-      'data': obj
-    };
+    let reuqestDataObj = obj;
 
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.loginUser(reuqestDataObj)
         .then(res => {
-          if (res && res.data && res.data.AccessToken) {
-            this.setUser(obj);
-            this.setToken(res.data.AccessToken);
-            resolve(true);
-          }
-          else {
-            resolve(false);
+          resolve(res);
+          if(res.success && res.message != 'User is Deactive') {
+            if (res && res.data && res.data.user) {
+              this.setUser(res.data.user);
+              this.setToken(res.data.user.first_name);
+              resolve(res);
+            }
           }
         }).catch(error => reject());
     });
@@ -79,9 +77,7 @@ export class LoginService {
 
   createUser(obj): Promise<any> {
 
-    let reuqestDataObj = {
-      'data': obj
-    };
+    let reuqestDataObj = obj;
 
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.createUser(reuqestDataObj)

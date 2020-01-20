@@ -19,6 +19,7 @@ class CreateUserManagementsTable extends Migration
             $table->string('last_name');
             $table->string('email_address');
             $table->string('password');
+            $table->string('token')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });
