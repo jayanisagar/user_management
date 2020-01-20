@@ -161,4 +161,32 @@ class UserManagementController extends BaseController
 
         return $this->sendResponse($usermanagement->toArray(), 'User deleted successfully.');
     }
+
+    public function statuschange($id) {
+        $input = $request->all();
+
+        $usermanagement = UserManagement::find($id);
+
+        $validator = Validator::make($input, [
+            'status' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
+
+        $usermanagement->status = $input['status'];
+        $usermanagement->save();
+
+        $inputUserActivity = [
+            'action' => 'post', 
+            'user_id' => 1, 
+            'details' => $usermanagement
+        ];
+
+        // Logs
+        $UserActivits = UserActivity::create($inputUserActivity);
+
+        return $this->sendResponse($usermanagement->toArray(), 'User updated successfully.');
+    }
 }

@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::resource('user_managements', 'API\UserManagementController');
+
+Route::get('user_activities/status/{id}', 'API\UserActivityController@statuschange');
 Route::resource('user_activities', 'API\UserActivityController');
 
 /* Route::resource('user_managements', 'API\UserManagementController')->except([

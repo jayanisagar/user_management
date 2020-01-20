@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!idEditUser && !idActivityUser">
     <h2>User List</h2>
     <table class="table table-bordered table-striped">
         <tr>
@@ -65,8 +65,8 @@
                 <label class="label">status</label>
             </div>
             <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
-                <input type="radio" name="status" value="true" formControlName="status"> Active
-                <input type="radio" name="status" value="false" formControlName="status"> Deactive
+                <input type="radio" name="status" value="1" formControlName="status"> Active
+                <input type="radio" name="status" value="0" formControlName="status"> Deactive
             </div>
         </div>
         

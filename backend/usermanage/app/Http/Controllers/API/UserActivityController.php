@@ -49,7 +49,22 @@ class UserActivityController extends BaseController
      */
     public function show($id)
     {
-        //
+        $userActivityList = UserActivity::where('user_id', $id)->get();
+
+        if (is_null($userActivityList)) {
+            return $this->sendError('User not found.');
+        }
+
+        $inputUserActivity = [
+            'action' => 'get/id', 
+            'user_id' => 1, 
+            'details' => $userActivityList
+        ];
+
+        // Logs
+        $UserActivits = UserActivity::create($inputUserActivity);
+
+        return $this->sendResponse($userActivityList->toArray(), 'User retrieved successfully.');
     }
 
     /**

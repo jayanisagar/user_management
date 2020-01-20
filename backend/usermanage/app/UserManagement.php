@@ -14,4 +14,6 @@ class UserManagement extends Model
     protected $fillable = [
         'first_name', 'last_name', 'email_address', 'password', 'status'
     ];
+
+    public $timestamps = false;
 }

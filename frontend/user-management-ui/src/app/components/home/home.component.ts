@@ -35,7 +35,8 @@ export class HomeComponent implements OnInit {
 
   loadData() {
     this.loginService.getUserList().then(res => {
-          this.userList = res;
+        if(res.data)
+          this.userList = res.data;
     });
   }
 
@@ -70,6 +71,7 @@ export class HomeComponent implements OnInit {
         break;
       case 'activityUser':
         this.idActivityUser = id;
+        this.getActiveUser();
         
     }
   }
@@ -112,7 +114,7 @@ export class HomeComponent implements OnInit {
   getActiveUser() {
     this.loginService.activityUser(this.idActivityUser).then(res => {
       console.log(res);
-      this.activityUserList = res;
+      this.activityUserList = res.data;
     });
   }
 }

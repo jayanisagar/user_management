@@ -63,7 +63,7 @@ export class LoginService {
     { id: 3, first_name: 'sagar', last_name: 'jayani', email_address: 'jayanisagar@gmail.com', password: '123456', status: true }
   ];
   
-  getUserList(): Promise<any[]> {
+  getUserList(): Promise<any> {
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.getUserList()
         .then(res => {
@@ -97,9 +97,8 @@ export class LoginService {
 
   editUser(id, obj): Promise<any> {
 
-    let reuqestDataObj = {
-      'data': obj
-    };
+    let reuqestDataObj = "first_name="+obj.first_name+"&last_name="+obj.last_name +
+    "&email_address="+ obj.email_address+"&password="+ obj.password+"&status="+obj.status;
 
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.editUser(id, reuqestDataObj)
@@ -129,7 +128,7 @@ export class LoginService {
   activeDeactiveUser(id, obj): Promise<any> {
 
     let reuqestDataObj = {
-      'data': obj
+      'status': obj
     };
 
     const promise = new Promise<any>((resolve, reject) => {
@@ -144,7 +143,7 @@ export class LoginService {
     return promise;
   }
 
-  activityUser(id): Promise<any[]> {
+  activityUser(id): Promise<any> {
     const promise = new Promise<any>((resolve, reject) => {
       this.dataService.activityUser(id)
         .then(res => {
